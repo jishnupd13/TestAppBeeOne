@@ -1,12 +1,16 @@
 package com.app.architecturepattern.di
 
+import android.content.Context
 import com.app.architecturepattern.common.Constants
 import com.app.architecturepattern.data.remote.ApiService
 import com.app.architecturepattern.data.repository.AppRepositoryImpl
+import com.app.architecturepattern.data.repository.DataStoreRepositoryImpl
 import com.app.architecturepattern.domain.repository.ApiRepository
+import com.app.architecturepattern.domain.repository.DataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,7 +36,7 @@ object AppModule {
     @Singleton
     fun provideApiService(
         okHttpClient: OkHttpClient,
-        ): ApiService {
+    ): ApiService {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -45,5 +49,11 @@ object AppModule {
     @Singleton
     fun provideApiRepository(api: ApiService): ApiRepository {
         return AppRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDataRepository(@ApplicationContext context: Context): DataStoreRepository {
+        return DataStoreRepositoryImpl(context)
     }
 }
