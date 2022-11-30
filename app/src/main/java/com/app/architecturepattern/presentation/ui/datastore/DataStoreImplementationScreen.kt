@@ -36,13 +36,20 @@ fun DataStoreImplementationScreen(
 
             Button(onClick = {
                 viewModel.saveUserName(text)
-                viewModel.fetchUserName()
             }, modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 14.dp, end = 14.dp, top = 10.dp)) {
                 Text(text = "Save")
             }
-            
+
+            Button(onClick = {
+                viewModel.fetchUserName()
+            }, modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 14.dp, end = 14.dp, top = 10.dp)) {
+                Text(text = "Read")
+            }
+
             Text(text = name.value, modifier = Modifier.fillMaxWidth().padding(start = 14.dp, end = 14.dp, top = 10.dp), color = Color.Cyan)
         }
     }

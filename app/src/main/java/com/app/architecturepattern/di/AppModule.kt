@@ -1,6 +1,13 @@
 package com.app.architecturepattern.di
 
+import android.app.Application
+import android.app.blob.BlobStoreManager
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.datastore.preferences.preferencesDataStoreFile
 import com.app.architecturepattern.common.Constants
 import com.app.architecturepattern.data.remote.ApiService
 import com.app.architecturepattern.data.repository.AppRepositoryImpl
@@ -51,9 +58,20 @@ object AppModule {
         return AppRepositoryImpl(api)
     }
 
+
+
     @Provides
     @Singleton
-    fun provideDataRepository(@ApplicationContext context: Context): DataStoreRepository {
-        return DataStoreRepositoryImpl(context)
+    fun dataStore(@ApplicationContext appContext: Context): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create(
+            produceFile = {
+                appContext.preferencesDataStoreFile(Constants.DATA_STORE_NAME)
+            }
+        )
+    @Provides
+    @Singleton
+    fun provideDataRepository(dataStore: DataStore<Preferences>): DataStoreRepository {
+        return DataStoreRepositoryImpl(dataStore)
     }
 }
+
