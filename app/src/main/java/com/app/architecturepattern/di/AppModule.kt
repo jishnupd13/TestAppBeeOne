@@ -1,19 +1,15 @@
 package com.app.architecturepattern.di
 
-import android.app.Application
-import android.app.blob.BlobStoreManager
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.app.architecturepattern.common.Constants
+import com.app.architecturepattern.common.DataStoreHandler
 import com.app.architecturepattern.data.remote.ApiService
 import com.app.architecturepattern.data.repository.AppRepositoryImpl
-import com.app.architecturepattern.data.repository.DataStoreRepositoryImpl
 import com.app.architecturepattern.domain.repository.ApiRepository
-import com.app.architecturepattern.domain.repository.DataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,7 +55,6 @@ object AppModule {
     }
 
 
-
     @Provides
     @Singleton
     fun dataStore(@ApplicationContext appContext: Context): DataStore<Preferences> =
@@ -68,10 +63,14 @@ object AppModule {
                 appContext.preferencesDataStoreFile(Constants.DATA_STORE_NAME)
             }
         )
+
     @Provides
     @Singleton
-    fun provideDataRepository(dataStore: DataStore<Preferences>): DataStoreRepository {
-        return DataStoreRepositoryImpl(dataStore)
+    fun provideDataStoreHandler(
+        preference: DataStore<Preferences>
+    ): DataStoreHandler {
+        return DataStoreHandler(preference)
     }
+
 }
 
