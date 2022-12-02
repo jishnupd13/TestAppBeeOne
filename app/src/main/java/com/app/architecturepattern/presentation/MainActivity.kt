@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             navHostController = rememberNavController()
-            ArchitecturePatternTheme {
+            ArchitecturePatternTheme(darkTheme = false) {
                 val systemUiController = rememberSystemUiController()
                 SideEffect {
                     systemUiController.setStatusBarColor(

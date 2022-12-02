@@ -1,21 +1,19 @@
 package com.app.architecturepattern.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-private val DarkColorPalette = darkColors(
+private val DarkColorPalette = darkColorScheme(
     primary = LightBlue,
-    primaryVariant = LightBlue,
     secondary = White
 )
 
-private val LightColorPalette = lightColors(
+private val LightColorPalette = lightColorScheme(
     primary = LightBlue,
-    primaryVariant = LightBlue,
-    secondary = LightBlue
+    secondary = White
 
     /* Other default colors to override
     background = Color.White,
@@ -32,19 +30,16 @@ fun ArchitecturePatternTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    /*val colors = if (darkTheme) {
+    val colors = if (darkTheme) {
         DarkColorPalette
     } else {
         LightColorPalette
-    }*/
+    }
 
-    //For disable the dark theme
-    val colors = LightColorPalette
 
     MaterialTheme(
-        colors = colors,
-        typography = QuickSandTypography,
         shapes = Shapes,
-        content = content
+        content = content,
+        colorScheme = colors
     )
 }

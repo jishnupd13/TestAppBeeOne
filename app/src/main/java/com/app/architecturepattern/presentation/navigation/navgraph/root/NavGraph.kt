@@ -4,11 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.app.architecturepattern.presentation.navigation.navgraph.home.homeNavGraph
-import com.app.architecturepattern.presentation.navigation.routes.HOME_GRAPH_ROOT
+import com.app.architecturepattern.presentation.ui.login.LoginScreen
 import com.app.architecturepattern.presentation.navigation.routes.ROUTE_GRAPH_ROOT
 import com.app.architecturepattern.presentation.navigation.routes.Routes
-import com.app.architecturepattern.presentation.ui.datastore.DataStoreImplementationScreen
 
 @Composable
 fun SetUpNavGraph(
@@ -17,12 +15,12 @@ fun SetUpNavGraph(
 
     NavHost(
         navController = navHostController,
-        startDestination = Routes.DataStoreScreen.route,
+        startDestination = Routes.Login.route,
         route = ROUTE_GRAPH_ROOT
     ) {
-        composable( Routes.DataStoreScreen.route){
-            DataStoreImplementationScreen()
+        composable(Routes.Login.route) {
+            LoginScreen(navHostController = navHostController)
         }
-        homeNavGraph(navHostController = navHostController)
+
     }
 }
