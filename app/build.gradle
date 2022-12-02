@@ -98,5 +98,10 @@ dependencies {
     //Coil
     implementation("io.coil-kt:coil-compose:1.4.0")
 
+    // status bar customization
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.23.1"
+
+    // Splash screen Api
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
 }
