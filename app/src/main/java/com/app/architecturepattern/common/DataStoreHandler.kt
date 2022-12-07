@@ -14,6 +14,8 @@ class DataStoreHandler @Inject constructor(
 ) {
 
     private val NAME = stringPreferencesKey("Name")
+    private val EMAIL = stringPreferencesKey("Email")
+    //because no application saves the password because it effect applications security
 
     suspend fun saveName(name: String) {
         dataStorePreferences.edit { mutablePreferences ->
@@ -24,6 +26,18 @@ class DataStoreHandler @Inject constructor(
     fun fetchName() = flow {
         dataStorePreferences.data.map { value: Preferences ->
             emit(value[NAME] ?: "")
+        }.collect()
+    }
+
+    suspend fun saveEmail(email: String) {
+        dataStorePreferences.edit { mutablePreferences ->
+            mutablePreferences[EMAIL] = email
+        }
+    }
+
+    fun fetchEmail() = flow {
+        dataStorePreferences.data.map { value: Preferences ->
+            emit(value[EMAIL] ?: "")
         }.collect()
     }
 

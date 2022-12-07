@@ -146,6 +146,10 @@ fun LoginScreen(
                 )
             }
 
+            if (!viewModel.passwordValidationStatus.value && !viewModel.emailValidationStatus.value) {
+
+            }
+
         }
     }
 }
