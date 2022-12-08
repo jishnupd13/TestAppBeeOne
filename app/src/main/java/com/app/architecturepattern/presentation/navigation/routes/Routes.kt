@@ -8,5 +8,5 @@ sealed class Routes(val route: String) {
     object Home : Routes("user_list_screen")
     object DataStoreScreen : Routes("data_store_user")
     object Login : Routes("login")
-    object HOmeScreen : Routes("home_screen")
+    object HomeScreen : Routes("home_screen")
 }

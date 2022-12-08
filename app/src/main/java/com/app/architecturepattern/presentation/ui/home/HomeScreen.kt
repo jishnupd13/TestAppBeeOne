@@ -1,5 +1,6 @@
 package com.app.architecturepattern.presentation.ui.home
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -11,6 +12,7 @@ fun HomeScreen(
     navHostController: NavHostController
 ) {
 
+    Text(text = "hello")
 }
 
 @Preview(showBackground = true)

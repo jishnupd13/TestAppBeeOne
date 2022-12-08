@@ -1,5 +1,6 @@
 package com.app.architecturepattern.presentation.ui.login.components
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,8 +20,14 @@ class LoginViewModel @Inject constructor(
     val password = mutableStateOf("")
     val emailValidationStatus = mutableStateOf(false)
     val passwordValidationStatus = mutableStateOf(false)
+    val navigationStatus = mutableStateOf(false)
+
+    init {
+        fetchEmail()
+    }
 
     fun validateLogin() {
+
         when {
 
             !validationUtilsUseCase.validateEmail(email = email.value) -> {
@@ -36,6 +43,7 @@ class LoginViewModel @Inject constructor(
             else -> {
                 emailValidationStatus.value = false
                 passwordValidationStatus.value = false
+                navigationStatus.value = false
                 viewModelScope.launch {
                     dataStoreHandler.saveEmail(email = email.value)
                 }
@@ -44,4 +52,12 @@ class LoginViewModel @Inject constructor(
     }
 
 
+    private fun fetchEmail() = viewModelScope.launch {
+        dataStoreHandler.fetchEmail().collect {
+            Log.e("validate","<<<< $it >>>")
+            if (it.isNotEmpty()) {
+                navigationStatus.value = true
+            }
+        }
+    }
 }
