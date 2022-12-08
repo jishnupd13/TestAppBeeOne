@@ -1,4 +1,4 @@
-package com.app.architecturepattern.presentation.ui.login.components
+package com.app.architecturepattern.presentation.ui.login
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf

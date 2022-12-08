@@ -1,6 +1,5 @@
 package com.app.architecturepattern.presentation.ui.login
 
-import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,7 +30,6 @@ import com.app.architecturepattern.presentation.theme.LightBlue
 import com.app.architecturepattern.presentation.theme.QuickSand
 import com.app.architecturepattern.presentation.theme.UnFocusedColor
 import com.app.architecturepattern.presentation.theme.White
-import com.app.architecturepattern.presentation.ui.login.components.LoginViewModel
 import com.app.architecturepattern.presentation.ui.login.components.TopBarScreen
 
 
